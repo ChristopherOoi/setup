@@ -1,92 +1,77 @@
 set nocompatible              " required
 filetype off                  " required
+set backspace=indent,eol,start
+set showcmd
 
-" set the runtime path to include Vundle and initialize
+map <leader>vimrc :tabe ~/.vimrc<cr>
+autocmd bufwritepost .vimrc source ~/.vimrc
+
 set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#rc()
+call vundle#begin()
 
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
-" let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'sheerun/vim-polyglot'
+Plugin 'neoclide/coc.nvim'
 Plugin 'junegunn/seoul256.vim'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
 
-" add all your plugins here (note older versions of Vundle
-" used Bundle instead of Plugin)
-
-" ...
-
-" All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 set encoding=utf-8
 set nu
+set relativenumber
 
-
-" Enable code folding
-set foldmethod=indent
-set foldlevel=99
-" set foldcolumn=2
-nnoremap <space> za
-
-" Python stuff
 au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=99 |
+    \ set textwidth=79 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
 
-" add mapping for auto closing
-function! Close(open, close)
-    return a:open .  a:close . "\<Left>"
-endfunction
-
-function! CloseNL(open, close)
-    return a:open . "\<CR>\<CR>" . a:close . "\<Up>"
-endfunction
-
-" close brackets and quotes and stuff
-inoremap <expr> '<tab> Close("'", "'")
-inoremap <expr> "<tab> Close('"', '"')
-inoremap <expr> (<tab> Close("(", ")")
-inoremap <expr> [<tab> Close("[", "]")
-inoremap <expr> {<tab> Close("{", "}")
-
-" close brackets with nl
-" so (<CR>
-" becomes
-" (
-"
-" )
-inoremap <expr> (<CR> CloseNL("(", ")")
-inoremap <expr> [<CR> CloseNL("[", "]")
-inoremap <expr> {<CR> CloseNL("{", "}")
-inoremap <expr> """<CR> CloseNL('"""','"""')
-
-
 syntax on
 let python_highlight_all=1
-let g:ycm_autoclose_preview_window_after_insertion=1
-let g:ycm_autoclose_preview_window_after_completion=1
 let g:python_highlight_space_errors=0
 
 let g:seoul256_background=236
 colorscheme seoul256
 
-" Other file formats
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2 |
-    \ set softtabstop=2 |
-    \ set shiftwidth=2
+" find files with fzf
+nnoremap <leader>f :Files<CR>
 
-" For YouCompleteMe
-let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_enable_semantic_highlighting=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" find in loaded buffers with fzf
+nnoremap <leader>l :Lines<CR>
+
+" find in current buffer with fzf
+nnoremap <leader>b :BLines<CR>
+
+" coc settings
+
+inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
+inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list
+nmap <silent> <leader>g <Plug>(coc-list-diagnostics)
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" GoTo code navigation
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
