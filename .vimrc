@@ -6,17 +6,21 @@ set showcmd
 map <leader>vimrc :tabe ~/.vimrc<cr>
 autocmd bufwritepost .vimrc source ~/.vimrc
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+  silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-Plugin 'gmarik/Vundle.vim'
-Plugin 'neoclide/coc.nvim'
-Plugin 'psf/black'
-Plugin 'junegunn/seoul256.vim'
-Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plugin 'junegunn/fzf.vim'
+call plug#begin()
 
-call vundle#end()            " required
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'psf/black'
+Plug 'junegunn/seoul256.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+call plug#end()            " required
 filetype plugin indent on    " required
 
 set encoding=utf-8
