@@ -11,6 +11,7 @@ call vundle#begin()
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'neoclide/coc.nvim'
+Plugin 'psf/black'
 Plugin 'junegunn/seoul256.vim'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
@@ -46,6 +47,16 @@ nnoremap <leader>l :Lines<CR>
 
 " find in current buffer with fzf
 nnoremap <leader>b :BLines<CR>
+
+
+
+" black settings
+
+let g:black_use_virtualenv=0
+" format with black on write
+autocmd BufWritePre *.py execute ':Black'
+
+
 
 " coc settings
 
