@@ -11,7 +11,8 @@ set showcmd
 map <leader>vimrc :tabe ~/.vimrc<cr>
 " automatically source ~/.vimrc when .vimrc is written
 autocmd bufwritepost .vimrc source ~/.vimrc
-
+" disable auto comment from newline :h formatoptions
+set formatoptions-=cro
 
 
 "
