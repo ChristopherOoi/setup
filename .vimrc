@@ -87,7 +87,6 @@ au BufNewFile,BufRead *.py
     \ set tabstop=4 |
     \ set softtabstop=4 |
     \ set shiftwidth=4 |
-    \ set textwidth=79 |
     \ set expandtab |
     \ set autoindent |
     \ set fileformat=unix
@@ -130,7 +129,7 @@ autocmd BufWritePre *.py execute ':Black'
 "
 " coc settings
 "
-" enter to get first selection even if nothing selected
+" enter confirms selection
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 " tab to cycle forward in list, shift tab to cycle back
 inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
