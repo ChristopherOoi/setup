@@ -130,13 +130,15 @@ autocmd BufWritePre *.py execute ':Black'
 "
 " coc settings
 "
+" \k to toggle inlays
+nnoremap <leader>k :CocCommand document.toggleInlayHint<CR><Esc>
 " enter confirms selection
 inoremap <expr> <cr> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
 " tab to cycle forward in list, shift tab to cycle back
 inoremap <expr> <Tab> coc#pum#visible() ? coc#pum#next(1) : "\<Tab>"
 inoremap <expr> <S-Tab> coc#pum#visible() ? coc#pum#prev(1) : "\<S-Tab>"
 " Use `:CocDiagnostics` or \g to get all diagnostics of current buffer in location list
-nmap <silent> <leader>g <Plug>(coc-list-diagnostics)
+nmap <silent> <leader>g :CocDiagnostics<CR>
 " Use `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
