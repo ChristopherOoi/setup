@@ -66,6 +66,11 @@ nnoremap <leader>] <C-W>>
 " set terminal window to be 20 rows high
 set termwinsize=20x0
 nnoremap <leader>` :bot term<CR>
+"
+" copy and paste to system clipboard
+"
+nnoremap <leader>c "+y
+nnoremap <leader>p "+p
 
 
 
