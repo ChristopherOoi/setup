@@ -36,6 +36,7 @@ Plug 'psf/black'
 Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'github/copilot.vim'
 
 call plug#end()            " required
 filetype plugin indent on    " required
@@ -162,3 +163,11 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+" 
+" copilot settings
+" 
+" start with copilot disabled
+let g:copilot#enabled = v:false
+" toggle copilot with \cp
+nnoremap <leader>cp :let g:copilot#enabled = !g:copilot#enabled<CR>

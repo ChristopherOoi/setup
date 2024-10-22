@@ -77,7 +77,8 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 # export MANPATH="/usr/local/man:$MANPATH"
-
+# for utilities
+export PATH="$PATH:/home/krise/utilities/images/"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -122,3 +123,10 @@ unset __conda_setup
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# fnm
+FNM_PATH="/home/krise/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/krise/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
