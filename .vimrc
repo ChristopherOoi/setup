@@ -1,4 +1,6 @@
 set nocompatible              " required
+set foldmethod=indent
+set nofoldenable
 filetype off                  " required
 
 

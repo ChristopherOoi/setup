@@ -78,7 +78,15 @@ source $ZSH/oh-my-zsh.sh
 
 # export MANPATH="/usr/local/man:$MANPATH"
 # for utilities
-export PATH="$PATH:/home/krise/utilities/images/"
+export PATH="/home/krise/utilities/images/:$PATH"
+
+export CUDA_PATH="/usr/local/cuda-11.8"
+export CUDA_HOME="$CUDA_PATH"
+export PATH="$CUDA_PATH/bin:$PATH"
+export LD_LIBRARY_PATH="/usr/local/cuda/lib64/stubs:$CUDA_PATH/lib64:/usr/lib/wsl/lib/:$LD_LIBRARY_PATH"
+export LIBRARY_PATH="$LD_LIBRARY_PATH:$LIBRARY_PATH"
+
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
@@ -103,6 +111,10 @@ export PATH="$PATH:/home/krise/utilities/images/"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+alias winhome="cd /mnt/c/Users/Chris/Documents/"
+alias ta="tree"
+alias td="tree -d"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
