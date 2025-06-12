@@ -110,7 +110,7 @@ let python_highlight_all=1
 let g:python_highlight_space_errors=0
 let g:seoul256_background=236
 colorscheme seoul256
-
+let &colorcolumn=join(range(80,999),',')
 
 
 "
