@@ -38,6 +38,7 @@ Plug 'psf/black'
 Plug 'junegunn/seoul256.vim'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
 Plug 'github/copilot.vim'
 
 call plug#end()            " required
@@ -46,27 +47,27 @@ filetype plugin indent on    " required
 
 
 "
+" netrw stuff
+"
+let g:netrw_banner = 0
+
+
+
+"
 " personalised keymappings
 "
 " open buffers
 "
-" vertical
 nnoremap <leader>s <C-W>s
-" horizontal
 nnoremap <leader>v <C-W>v
-"
 " resize split buffers
-"
-" vertical
 nnoremap <leader>- <C-W>-
 nnoremap <leader>= <C-W>+
-" horizontal
 nnoremap <leader>[ <C-W><
 nnoremap <leader>] <C-W>>
 " 
 " open terminal below
 "
-" set terminal window to be 20 rows high
 set termwinsize=20x0
 nnoremap <leader>` :bot term<CR>
 "
@@ -128,9 +129,7 @@ nnoremap <leader>b :BLines<CR>
 "
 " black settings
 "
-" don't use venv
 let g:black_use_virtualenv=0
-" format with black on write
 autocmd BufWritePre *.py execute ':Black'
 
 
@@ -166,10 +165,19 @@ function! ShowDocumentation()
   endif
 endfunction
 
-" 
-" copilot settings
-" 
-" start with copilot disabled
+
+
+"
+" copilot stuff
+"
 let g:copilot#enabled = v:false
-" toggle copilot with \cp
-nnoremap <leader>cp :let g:copilot#enabled = !g:copilot#enabled<CR>
+
+
+"
+" nerdtree settings
+"
+nnoremap <leader>tt :NERDTree %:p:h<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+let NERDTreeShowHidden=1
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+let NERDTreeIgnore = ['__pycache__', '\.pyc$', '\.o$', '\.so$', '\.a$', '\.swp', '*\.swp', '\.swo', '\.swn', '\.swh', '\.swm', '\.swl', '\.swk', '\.sw*$', '[a-zA-Z]*egg[a-zA-Z]*', '.DS_Store']
