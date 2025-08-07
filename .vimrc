@@ -5,6 +5,11 @@ filetype off                  " required
 
 
 
+" tmux window title
+autocmd BufEnter * call system("tmux rename-window " . expand("%:t"))
+autocmd VimLeave * call system("tmux setw automatic-rename")
+autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+set title
 " to get backspace working properly
 set backspace=indent,eol,start
 " show current cmd in bottom left
