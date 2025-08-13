@@ -38,7 +38,27 @@ ZSH_THEME="spaceship"
 # DISABLE_LS_COLORS="true"
 
 # Uncomment the following line to disable auto-setting terminal title.
-# DISABLE_AUTO_TITLE="true"
+DISABLE_AUTO_TITLE="true"
+
+set_window_title() {
+    local cmd="$1"                       # $1 = command about to run
+    cmd="${cmd:0:50}"                    # Optional: truncate to 50 chars
+    if [[ -n "$TMUX" ]]; then
+        tmux rename-window "$cmd"        # Rename tmux window directly
+    else
+        print -Pn "\033]0;${cmd}\007"    # Fallback: change terminal title
+    fi
+}
+
+# zsh preexec hook: runs before each command
+preexec() {
+    set_window_title "$1"
+}
+
+precmd() {
+    set_window_title "zsh"
+}
+
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -142,3 +162,5 @@ if [ -d "$FNM_PATH" ]; then
   export PATH="/home/krise/.local/share/fnm:$PATH"
   eval "`fnm env`"
 fi
+
+. "$HOME/.local/bin/env"
