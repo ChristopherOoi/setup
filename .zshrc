@@ -42,7 +42,7 @@ DISABLE_AUTO_TITLE="true"
 
 set_window_title() {
     local cmd="$1"                       # $1 = command about to run
-    cmd="${cmd:0:50}"                    # Optional: truncate to 50 chars
+    cmd="${cmd:0:20}"                    # Optional: truncate to 50 chars
     if [[ -n "$TMUX" ]]; then
         tmux rename-window "$cmd"        # Rename tmux window directly
     else
@@ -59,6 +59,10 @@ precmd() {
     set_window_title "zsh"
 }
 
+function chpwd() {
+    emulate -L zsh
+    ls -a
+}
 
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
@@ -164,3 +168,5 @@ if [ -d "$FNM_PATH" ]; then
 fi
 
 . "$HOME/.local/bin/env"
+
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

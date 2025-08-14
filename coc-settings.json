@@ -1,4 +1,5 @@
 {
+  "python.jediEnabled": false,
   "semanticTokens.enable": true,
   "inlayHint.display": false,
   "suggest.minTriggerInputLength": 2,
