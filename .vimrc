@@ -18,7 +18,6 @@ set showcmd
 map <leader>vimrc :tabe ~/.vimrc<cr>
 " automatically source ~/.vimrc when .vimrc is written
 autocmd bufwritepost .vimrc source ~/.vimrc
-autocmd bufwritepost .zshrc source ~/.zshrc
 " disable auto comment from newline :h formatoptions
 set formatoptions-=cro
 

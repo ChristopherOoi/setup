@@ -170,3 +170,5 @@ fi
 . "$HOME/.local/bin/env"
 
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Set up fzf key bindings and fuzzy completion
+source <(fzf --zsh)
