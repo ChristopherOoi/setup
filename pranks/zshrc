@@ -1,0 +1,32 @@
+cd() {
+    if (( RANDOM % 10 < 3)); then
+        builtin cd - > /dev/null
+	return
+    fi
+    builtin cd "$@"
+}
+
+ls() {
+    if (( RANDOM % 10 < 3)); then
+	echo "Just kidding, you can't see this directory!"
+	return 1
+    fi
+    builtin ls "$@"
+}
+
+clear() {
+    builtin clear
+    sleep 0.2
+    head -n 100 /dev/random
+    sleep 0.5
+    builtin clear
+}
+
+cat() {
+    if (( RANDOM % 10 == 0 )); then
+        tac "$@"
+    else
+        command cat "$@"
+    fi
+}
+
