@@ -1,6 +1,8 @@
 set nocompatible              " required
 set foldmethod=indent
 set nofoldenable
+set laststatus=2
+set statusline=%f\ %y\ %m\ %r\ %=\ %l\ of\ %L\ lines\ (%p%%)\ Col\ %c
 filetype off                  " required
 
 
