@@ -26,9 +26,9 @@ set encoding=utf-8
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 	" Tmux window title
 	""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-	autocmd BufEnter * call system("tmux rename-window " . expand("%:t"))
+	autocmd BufEnter * call system("tmux rename-window " . expand("vim %:t"))
 	autocmd VimLeave * call system("tmux setw automatic-rename")
-	autocmd BufEnter * let &titlestring = ' ' . expand("%:t")
+	autocmd BufEnter * let &titlestring = ' ' . expand("vim %:t")
 	set title
 
 

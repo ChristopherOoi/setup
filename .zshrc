@@ -50,20 +50,6 @@ set_window_title() {
     fi
 }
 
-# zsh preexec hook: runs before each command
-preexec() {
-    set_window_title "$1"
-}
-
-precmd() {
-    set_window_title "zsh"
-}
-
-function chpwd() {
-    emulate -L zsh
-    ls -a
-}
-
 # Uncomment the following line to enable command auto-correction.
 # ENABLE_CORRECTION="true"
 
@@ -103,11 +89,12 @@ source $ZSH/oh-my-zsh.sh
 # export MANPATH="/usr/local/man:$MANPATH"
 # for utilities
 export PATH="/home/krise/utilities/images/:$PATH"
+export PYTHONPATH=$PWD:$PYTHONPATH
 
-export CUDA_PATH="/usr/local/cuda-12.8"
+export CUDA_PATH="/usr/local/cuda-11.6"
 export CUDA_HOME="$CUDA_PATH"
 export PATH="$CUDA_PATH/bin:$PATH"
-export LD_LIBRARY_PATH="/usr/local/cuda/lib64/stubs:$CUDA_PATH/lib64:/usr/lib/wsl/lib/:$LD_LIBRARY_PATH"
+export LD_LIBRARY_PATH="$CUDA_PATH/lib64:/usr/lib/wsl/lib/:$LD_LIBRARY_PATH"
 export LIBRARY_PATH="$LD_LIBRARY_PATH:$LIBRARY_PATH"
 
 
@@ -136,7 +123,6 @@ export LIBRARY_PATH="$LD_LIBRARY_PATH:$LIBRARY_PATH"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias winhome="cd /mnt/c/Users/Chris/Documents/"
 alias ta="tree"
 alias td="tree -d"
 
@@ -164,6 +150,12 @@ export NVM_DIR="$HOME/.nvm"
 FNM_PATH="/home/krise/.local/share/fnm"
 if [ -d "$FNM_PATH" ]; then
   export PATH="/home/krise/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
+BREW_PATH="/home/linuxbrew/.linuxbrew/bin"
+if [ -d "$BREW_PATH" ]; then
+  export PATH="/home/linuxbrew/.linuxbrew/bin:$PATH"
   eval "`fnm env`"
 fi
 
