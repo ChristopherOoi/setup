@@ -51,6 +51,7 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'preservim/nerdtree'
 Plug 'github/copilot.vim'
+Plug 'DanBradbury/copilot-chat.vim'
 
 call plug#end()            " required
 filetype plugin indent on    " required
